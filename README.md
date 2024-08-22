@@ -33,7 +33,9 @@ The design language of PersonaPage is modern and minimalistic, with a consistent
 **Technical Details:**
 
 _Framework_: Django
+
 _Frontend_: HTML5, CSS3
+
 _Deployment_: Suitable for deployment on any Django-compatible hosting service.
 
 **Purpose & Use Cases:**
