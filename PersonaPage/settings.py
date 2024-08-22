@@ -27,7 +27,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY', default='your_default_secret_key_here')
 DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 # ALLOWED_HOSTS should include your domain or IP address for deployment
-ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='').split(',')
+ALLOWED_HOSTS = ['personapage.onrender.com']
 
 # Application definition
 
