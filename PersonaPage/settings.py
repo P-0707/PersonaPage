@@ -27,7 +27,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY', default='your_default_secret_key_here')
 DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 # ALLOWED_HOSTS should include your domain or IP address for deployment
-ALLOWED_HOSTS = ['personapage.railway.app']
+ALLOWED_HOSTS = ALLOWED_HOSTS = ['personapage-production.up.railway.app', '127.0.0.1', 'localhost']
 
 # Application definition
 
