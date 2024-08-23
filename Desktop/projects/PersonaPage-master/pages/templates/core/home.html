@@ -1,0 +1,83 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="home-class">
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h1>Hello, I'm {{ me.first_name }} {{ me.last_name }}!</h1>
+                    <p>{{ me.biography }}</p>
+                    {% if resume_url %}
+                        <a href="{{ resume_url }}" class="download-btn" download>Download My Resume</a>
+                    {% endif %}
+                </div>
+                <div class="intro-image">
+                    <img src="{{ me.profile_picture.url }}" alt="Profile Picture" class="intro-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container">
+            <h2>What I Bring to the Table</h2>
+            <div class="skills-content">
+                <!-- Technical Skills -->
+                <div class="coding-skills">
+                    <h3>Technical Mastery</h3>
+                    <ul>
+                        {% for skill in me.skills.all %}
+                            {% if skill.is_primary %}
+                                <li><strong>{{ skill.name }}</strong>: {{ skill.proficiency }} level expertise.</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- Professional Skills -->
+                <div class="non-coding-skills">
+                    <h3>Professional Prowess</h3>
+                    <ul>
+                        {% for skill in me.skills.all %}
+                            {% if not skill.is_primary %}
+                                <li><strong>{{ skill.name }}</strong>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications-section1">
+        <div class="container">
+            <h2>My Professional Badges of Honor</h2>
+            <div class="certifications-grid">
+                {% for cert in certifications %}
+                    {% if cert.is_visible %}
+                        <div class="certification-item">
+                            {% if cert.certification_image %}
+                                <img src="{{ cert.certification_image.url }}" alt="{{ cert.certification_title }}" class="certification-image">
+                            {% endif %}
+                            <div class="certification-content">
+                                <h3>{{ cert.certification_title }}</h3>
+                                <!-- Render description as safe HTML -->
+                                <p class="certification-description">{{ cert.certification_description|slice:":100"|safe }}...</p>
+                                <a href="{% url 'pages:certification_detail' cert.id %}" class="view-details-btn">View Details</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
