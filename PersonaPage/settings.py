@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 from decouple import config
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,8 +27,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY', default='your_default_secret_key_here')
 DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 # ALLOWED_HOSTS should include your domain or IP address for deployment
-#ALLOWED_HOSTS = ALLOWED_HOSTS = ['personapage-production.up.railway.app', '127.0.0.1', 'localhost']
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['personapage-production.up.railway.app', 'www.personapage-production.up.railway.app']
 
 # Application definition
 
@@ -122,9 +120,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# CSRF settings for production
+CSRF_COOKIE_SECURE = True  # Use True if using HTTPS
+CSRF_COOKIE_HTTPONLY = True
+CSRF_TRUSTED_ORIGINS = [
+    'https://personapage-production.up.railway.app',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
